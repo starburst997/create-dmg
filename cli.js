@@ -42,6 +42,14 @@ const cli = meow(`
 		dmgTitle: {
 			type: 'string',
 		},
+		format: {
+			type: 'string',
+			default: 'ULFO' // ULFO requires macOS 10.11+, use UDZO for compat
+		},
+		fs: {
+			type: 'string',
+			default: 'APFS' // APFS requires macOS 10.13+, use HFS+ for compat
+		},
 	},
 });
 
@@ -110,8 +118,8 @@ async function init() {
 		composedIconPath = await composeIcon(path.join(appPath, 'Contents/Resources', `${appIconName}.icns`));
 	}
 
-	const dmgFormat = 'UDZO'; // ULFO requires macOS 10.11+
-	const dmgFilesystem = 'HFS+'; // APFS requires macOS 10.13+
+	const dmgFormat = cli.flags.format; 
+	const dmgFilesystem = cli.flags.fs;
 
 	const ee = appdmg({
 		target: dmgPath,
