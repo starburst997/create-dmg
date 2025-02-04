@@ -110,8 +110,8 @@ async function init() {
 		composedIconPath = await composeIcon(path.join(appPath, 'Contents/Resources', `${appIconName}.icns`));
 	}
 
-	const dmgFormat = 'ULFO'; // ULFO requires macOS 10.11+
-	const dmgFilesystem = 'APFS'; // APFS requires macOS 10.13+
+	const dmgFormat = 'UDZO'; // ULFO requires macOS 10.11+
+	const dmgFilesystem = 'HFS+'; // APFS requires macOS 10.13+
 
 	const ee = appdmg({
 		target: dmgPath,
